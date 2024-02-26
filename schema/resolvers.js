@@ -1,4 +1,4 @@
-const { UserList, MovieList } = require("../FakeData");
+const { UserList, MovieList, ToDoList } = require("../FakeData");
 const _ = require("lodash");
 
 const resolvers = {
@@ -23,7 +23,20 @@ const resolvers = {
       const movie = _.find(MovieList, { name });
       return movie;
     },
+
+    //Todo List
+
+    allTodoList: () => {
+      return ToDoList;
+    },
+
+    getUserTodo: (parent, args) => {
+      const userId = args.userId;
+      const result = _.find(ToDoList, { userId: userId });
+      return result.list;
+    },
   },
+
   User: {
     favouriteMovies: () => {
       return _.filter(MovieList, (movie) => movie.yearOfPublication <= 2015);

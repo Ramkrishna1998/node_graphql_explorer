@@ -61,4 +61,35 @@ const MovieList = [
     isInTheaters: false,
   },
 ];
-module.exports = { UserList, MovieList };
+const ToDoList = [
+  {
+    id: 1,
+    userId: "abc",
+    list: [
+      {
+        title: "Mono Repo",
+        status: "PENDING",
+      },
+      {
+        title: "Next.js",
+        status: "PENDING",
+      },
+    ],
+  },
+  {
+    id: 2,
+    userId: "test@gmail.com",
+    list: [
+      {
+        title: "Mono Repo",
+        status: "COMPLETED",
+      },
+      {
+        title: "Next.js",
+        status: "COMPLETED",
+      },
+    ],
+  },
+];
+
+module.exports = { UserList, MovieList, ToDoList };
