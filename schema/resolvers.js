@@ -1,6 +1,10 @@
 const { UserList, MovieList, ToDoList } = require("../FakeData");
 const _ = require("lodash");
 
+const todos = [];
+
+const getUniqueId = () => Math.floor(Math.random() * 100000);
+
 const resolvers = {
   Query: {
     //User Resolvers
@@ -32,8 +36,7 @@ const resolvers = {
 
     getUserTodo: (parent, args) => {
       const userId = args.userId;
-      const result = _.find(ToDoList, { userId: userId });
-      return result.list;
+      return todos.filter((todo) => todo.userId === userId);
     },
   },
 
@@ -50,7 +53,6 @@ const resolvers = {
       user.id = lastId + 1;
       UserList.push(user);
       return user;
-      console.log(user);
     },
 
     updateUsername: (parent, args) => {
@@ -63,6 +65,12 @@ const resolvers = {
         }
       });
       return userUpdated;
+    },
+
+    updateTodoList: (parent, args) => {
+      const { userId, title } = args.input;
+      todos.push({ id: getUniqueId(), title, userId, status: 'PENDING' });
+      return todos.filter((todo) => todo.userId === userId);
     },
   },
 };

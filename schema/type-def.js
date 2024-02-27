@@ -1,5 +1,5 @@
 const { gql } = require("apollo-server");
-
+ 
 const typeDefs = gql`
   type User {
     id: ID!
@@ -10,25 +10,25 @@ const typeDefs = gql`
     friends: [User!]
     favouriteMovies: [Movie]
   }
-
+ 
   type Movie {
     id: ID!
     name: String!
     yearOfPublication: Int!
     isInTheaters: Boolean!
   }
-
+ 
   type List {
     title: String
     status: STATUS
   }
-
+ 
   type ToDoType {
     id: ID!
     userId: String!
     list: [List]
   }
-
+ 
   type Query {
     users: [User!]!
     user(id: ID!): User
@@ -37,30 +37,36 @@ const typeDefs = gql`
     allTodoList: [ToDoType]
     getUserTodo(userId: String!): [List]
   }
-
+ 
   input CreateUserInput {
     name: String!
     username: String!
     age: Int!
     nationality: Nationality = INDIA
   }
-
+ 
   input UpdateUsernameInput {
     id: ID!
     newUsername: String!
   }
-
-  input UpdateUsernameInput {
+ 
+  type TodoList {
     id: ID!
-    newUsername: String!
+    title: String!
+    userId: String!
+    status: String!
   }
-
+  input UpdateTodoList {
+    title: String!
+    userId: String!
+  }
+ 
   type Mutation {
     createUser(input: CreateUserInput!): User
     updateUsername(input: UpdateUsernameInput!): User
-    updateTodoList(todo: )
+    updateTodoList(input: UpdateTodoList!): [TodoList]
   }
-
+ 
   enum Nationality {
     INDIA
     CANAD
