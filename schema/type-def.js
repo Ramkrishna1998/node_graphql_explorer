@@ -18,11 +18,24 @@ const typeDefs = gql`
     isInTheaters: Boolean!
   }
 
+  type List {
+    title: String
+    status: STATUS
+  }
+
+  type ToDoType {
+    id: ID!
+    userId: String!
+    list: [List]
+  }
+
   type Query {
     users: [User!]!
     user(id: ID!): User
     movies: [Movie!]!
     movie(name: String!): Movie!
+    allTodoList: [ToDoType]
+    getUserTodo(userId: String!): [List]
   }
 
   input CreateUserInput {
@@ -52,6 +65,10 @@ const typeDefs = gql`
     INDIA
     CANAD
     USA
+  }
+  enum STATUS {
+    PENDING
+    COMPLETED
   }
 `;
 module.exports = {
